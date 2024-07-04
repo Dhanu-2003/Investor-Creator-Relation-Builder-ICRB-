@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Website</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fffaf6;
+  }
+
+  nav {
+    background-color: #9fe9ff; /* Grey background #c8ac80*/
+
+    padding: 10px;
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+
+  }
+
+  nav ul li {
+    margin-right: 20px;
+  }
+
+  nav ul li a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+
+  }
+  .dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  cursor: pointer;
+  font-size: 20px;  
+  border: none;
+  outline: none;
+  color: #000000;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: 'Cambria';
+  margin: 0;
+}
+
+.dropdown:hover .dropbtn, .dropbtn:focus {
+  background-color: #fffdd0;
+  color: #7a4d04;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+}
+
+
+  .content {
+    background-color: #110f0d;
+    margin: 20px;
+    padding: 20px;
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .menu-icon {
+      display: flex;
+    }
+    nav ul {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      text-align: center;
+    }
+    nav ul li {
+      margin: 0;
+      padding: 15px 0;
+    }
+    nav ul li a {
+      font-size: 18px;
+    }
+    nav ul.show {
+      display: flex;
+    }
+  }
+  
+   .container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .search-bar {
+    margin-bottom: 20px;
+  }
+
+  .search-bar input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+
+  .table {
+    display: table;
+    width: 100%;
+  }
+
+  .row {
+    display: table-row;
+  }
+
+
+
+  .card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .card h2 {
+    margin-top: 0;
+  }
+
+  .card p {
+    margin-bottom: 10px;
+  }
+
+  .card button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .card button:hover {
+    background-color: #0056b3;
+  }
+  
+</style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <img style="height: 80px;" src="{{ url_for('static', filename='IdeaHubLOGO-removebg-preview.png') }}" alt="Idea Hub">
+    </div>
+   
+    <ul>
+      <li>
+        <div class="dropdown">
+        <button class="dropbtn" onmouseenter="myFunction1()" onmouseleave="myFunction1()" >MyProject
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="myDropdown_project" onmouseenter="myFunction1()" onmouseleave="myFunction1()" >
+          <a href="{{ url_for('add_project') }}" style="font-family: 'Times New Roman';">Add project</a>
+          <a href="{{ url_for('cur_pro') }}" style="font-family: 'Times New Roman';">Current Project</a>
+          <a href="{{ url_for('collab') }}" style="font-family: 'Times New Roman';">Collab with Project</a>
+        </div>
+        </div>
+      </li> 
+      <li>
+        <div class="dropdown">
+        <button class="dropbtn" onmouseenter="myFunction2()" onmouseleave="myFunction2()">MyInvestor
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="myDropdown_investor" onmouseenter="myFunction2()" onmouseleave="myFunction2()" >
+          <a href="{{ url_for('req_inv') }}" style="font-family: 'Times New Roman';">Request Invester</a>
+          <a href="{{ url_for('current_investor') }}" style="font-family: 'Times New Roman';">Currnt Investors</a>
+        </div>
+        </div>
+      </li> 
+      
+      <li>
+        <div class="dropdown">
+          <button class="dropbtn" onmouseenter="myFunction3()" onmouseleave="myFunction3()">MyAccount
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content" id="myDropdown_account" onmouseenter="myFunction3()" onmouseleave="myFunction3()" >
+            <a href="{{ url_for('profile') }}" style="font-family: 'Times New Roman';"> Profile </a>
+            <a href="{{ url_for('index') }}" style="font-family: 'Times New Roman';">LogOut</a>
+          </div>
+          </div>
+      </li>
+      
+    </ul>
+  </nav>
+<hr style=" height: 1px; background-color: #7a4d04;">
+
+<div style="text-align: center; word-spacing: 500%;margin: 1px; font-family: 'Times New Roman'; font-size: x-large;">
+  <span>C</span>
+  <span>U</span>
+  <span>R</span>
+  <span>R</span>
+  <span>E</span>
+  <span>N</span>
+  <span>T</span>
+  <span>&nbsp;</span>
+  <span>I</span>
+  <span>N</span>
+  <span>V</span>
+  <span>E</span>
+  <span>S</span>
+  <span>T</span>
+  <span>O</span>
+  <span>R</span>
+
+</div>
+<hr style=" height: 1px; background-color: #7a4d04;">
+<div class="container">
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchElements()">
+    </div>
+
+    
+    <div class="table" id="table">
+      {%for i in data%}
+      <div class="row" id="row1">
+          <div class="card">
+            <h2>Name : {{i[1]}}</h2>
+            <p>Mail : {{i[2]}}</p>
+            <p>Mobile : {{i[3]}}</p>
+            <p>Address : {{i[4]}}</p>
+            <p>Projects: {{i[5]}}</p>
+          </div>
+      </div> 
+      {%endfor%}
+    </div>
+  </div>
+  
+
+<script>
+function searchElements() {
+  var input, filter, table, cards, card, txtValue;
+  input = document.getElementById("searchInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("table");
+  cards = table.getElementsByClassName("card");
+  for (var i = 0; i < cards.length; i++) {
+    card = cards[i];
+    txtValue = card.textContent || card.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      card.parentElement.style.display = "";
+    } else {
+      card.parentElement.style.display = "none";
+    }
+  }
+}
+  function myFunction1() {
+  document.getElementById("myDropdown_project").classList.toggle("show"); 
+  }
+  function myFunction3() {
+  document.getElementById("myDropdown_account").classList.toggle("show"); 
+  }
+
+  function myFunction2() {
+  document.getElementById("myDropdown_investor").classList.toggle("show"); 
+  }
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+  var myDropdown = document.getElementById("myDropdown");
+    if (myDropdown.classList.contains('show')) {
+      myDropdown.classList.remove('show');
+    }
+  }
+}
+
+
+</script>
+
+</body>
+</html>
